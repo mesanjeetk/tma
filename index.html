@@ -1,196 +1,204 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Blog — Watch Ads</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My Blog — Watch Ads</title>
 
-  <!-- Keep your verification meta -->
-  <meta name="monetag" content="f55df23c6a9bf86610b6ed3900d3224d">
+    <!-- Keep your verification meta -->
+    <meta name="monetag" content="f55df23c6a9bf86610b6ed3900d3224d">
 
-  <!-- Monetag: In-page push zone (your snippet) -->
-  <script>(function(s){s.dataset.zone='10242143',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <!-- Monetag: In-page push zone (your snippet) -->
+    <!-- <script>(function (s) { s.dataset.zone = '10242143', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
 
-  <!-- Monetag: Interstitial / vignette zone (your snippet) -->
-  <script>(function(s){s.dataset.zone='10242148',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <!-- Monetag: Interstitial / vignette zone (your snippet) -->
+    <!-- <script>(function (s) { s.dataset.zone = '10242148', s.src = 'https://groleegni.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
+    <script>(function (s) { s.dataset.zone = '10242177', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <style>
+        :root {
+            --max-w: 900px;
+            --accent: #0078ff
+        }
 
-  <style>
-    :root{--max-w:900px;--accent:#0078ff}
-    body{font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;margin:0;background:#f7f8fb;color:#222}
-    .wrap{max-width:var(--max-w);margin:28px auto;padding:18px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    header h1{margin:0;font-size:1.4rem}
-    .controls{display:flex;gap:10px}
-    button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
-    .main{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:18px}
-    .content{background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(12,18,30,0.06)}
-    .sidebar{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(12,18,30,0.06)}
-    .post{padding:12px 0;border-bottom:1px solid #f0f2f5}
-    .post:last-child{border-bottom:0}
-    .post h2{margin:0;font-size:1.05rem}
-    .post p{margin:8px 0 0;color:#444}
-    #ad-box{margin-top:12px;padding:12px;border:1px dashed #e2e6ef;border-radius:8px;min-height:120px;display:flex;align-items:center;justify-content:center;background:#fcfeff;color:#333}
-    .meta{font-size:0.85rem;color:#666;margin-top:12px}
-    footer{margin-top:20px;text-align:center;color:#666;font-size:0.9rem}
-    @media (max-width:880px){
-      .main{grid-template-columns:1fr; }
-      .sidebar{order:2}
-    }
-  </style>
+        body {
+            font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            background: #f7f8fb;
+            color: #222
+        }
+
+        .wrap {
+            max-width: var(--max-w);
+            margin: 28px auto;
+            padding: 18px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px
+        }
+
+        button {
+            background: var(--accent);
+            color: #fff;
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+            margin-top: 18px
+        }
+
+        .content {
+            background: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(12, 18, 30, 0.06)
+        }
+
+        .sidebar {
+            background: #fff;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(12, 18, 30, 0.06)
+        }
+
+        .post {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f2f5
+        }
+
+        .post:last-child {
+            border-bottom: 0
+        }
+
+        .post h2 {
+            margin: 0;
+            font-size: 1.05rem
+        }
+
+        .post p {
+            margin: 8px 0 0;
+            color: #444
+        }
+
+        #ad-box {
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px dashed #e2e6ef;
+            border-radius: 8px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fcfeff;
+            color: #333
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 12px
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem
+        }
+
+        @media (max-width:880px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: 2
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
-      <h1>My Blog — Latest posts</h1>
-      <div class="controls">
-        <button id="pushBtn">Show In-Page Push</button>
-        <button id="interstitialBtn">Show Interstitial</button>
-      </div>
-    </header>
+    <div class="wrap">
+        <header>
+            <h1>My Blog — Latest posts</h1>
+            <div class="controls">
+                <button id="pushBtn">Show In-Page Push</button>
+                <button id="interstitialBtn">Show Interstitial</button>
+            </div>
+        </header>
 
-    <div class="main">
-      <section class="content">
-        <article class="post">
-          <h2>How to Improve Page Speed in 2025</h2>
-          <p>Page speed continues to be a major ranking and UX factor. In this post we cover techniques like resource prioritization, image formats, caching headers, and modern bundlers to keep your site snappy.</p>
-        </article>
+        <div class="main">
+            <section class="content">
+                <article class="post">
+                    <h2>How to Improve Page Speed in 2025</h2>
+                    <p>Page speed continues to be a major ranking and UX factor. In this post we cover techniques like
+                        resource prioritization, image formats, caching headers, and modern bundlers to keep your site
+                        snappy.</p>
+                </article>
 
-        <article class="post">
-          <h2>Understanding In-Page Push Ads</h2>
-          <p>In-page push (also called native or click-to-push) lets you show a compact offer within your content. We'll look at use cases and UX best practices for non-intrusive placement.</p>
-        </article>
+                <article class="post">
+                    <h2>Understanding In-Page Push Ads</h2>
+                    <p>In-page push (also called native or click-to-push) lets you show a compact offer within your
+                        content. We'll look at use cases and UX best practices for non-intrusive placement.</p>
+                </article>
 
-        <article class="post">
-          <h2>Interstitials: When to Use Them</h2>
-          <p>Interstitials are full-screen experiences. They have high visibility but should be used sparingly — typically for rewards, exit intent, or natural transitions between content.</p>
-        </article>
+                <article class="post">
+                    <h2>Interstitials: When to Use Them</h2>
+                    <p>Interstitials are full-screen experiences. They have high visibility but should be used sparingly
+                        — typically for rewards, exit intent, or natural transitions between content.</p>
+                </article>
 
-        <div id="ad-box" aria-live="polite">
-          <p>Ad area — SDK messages will appear here after you press a button.</p>
+                <div id="ad-box" aria-live="polite">
+                    <p>Ad area — SDK messages will appear here after you press a button.</p>
+                </div>
+
+                <p class="meta">Tip: open browser console (F12) to see SDK logs and debug messages.</p>
+            </section>
+
+            <aside class="sidebar">
+                <h3>About this site</h3>
+                <p>Short blog demo with Monetag ad zones inserted. The buttons at the top call the Monetag SDK functions
+                    that the injected scripts expose.</p>
+
+                <h4 style="margin-top:14px">Recent posts</h4>
+                <ul style="padding-left:18px;color:#333">
+                    <li>Optimizing Images</li>
+                    <li>Server-side vs Client-side Loading</li>
+                    <li>Ad UX Guidelines</li>
+                </ul>
+
+                <div style="margin-top:12px">
+                    <strong>Debug</strong>
+                    <div id="debug" style="margin-top:8px;font-size:0.9rem;color:#555"></div>
+                </div>
+            </aside>
         </div>
 
-        <p class="meta">Tip: open browser console (F12) to see SDK logs and debug messages.</p>
-      </section>
-
-      <aside class="sidebar">
-        <h3>About this site</h3>
-        <p>Short blog demo with Monetag ad zones inserted. The buttons at the top call the Monetag SDK functions that the injected scripts expose.</p>
-
-        <h4 style="margin-top:14px">Recent posts</h4>
-        <ul style="padding-left:18px;color:#333">
-          <li>Optimizing Images</li>
-          <li>Server-side vs Client-side Loading</li>
-          <li>Ad UX Guidelines</li>
-        </ul>
-
-        <div style="margin-top:12px">
-          <strong>Debug</strong>
-          <div id="debug" style="margin-top:8px;font-size:0.9rem;color:#555"></div>
-        </div>
-      </aside>
+        <footer>Built with Monetag integration — scripts placed as provided.</footer>
     </div>
 
-    <footer>Built with Monetag integration — scripts placed as provided.</footer>
-  </div>
-
-  <script>
-    // zone ids you provided
-    const pushZone = '10242143';
-    const interstitialZone = '10242148';
-
-    const pushBtn = document.getElementById('pushBtn');
-    const interstitialBtn = document.getElementById('interstitialBtn');
-    const adBox = document.getElementById('ad-box');
-    const debug = document.getElementById('debug');
-
-    function logDebug(msg) {
-      console.log(msg);
-      if (debug) {
-        const el = document.createElement('div');
-        el.textContent = msg;
-        debug.appendChild(el);
-        // keep last 8
-        while (debug.children.length > 8) debug.removeChild(debug.firstChild);
-      }
-    }
-
-    function safeCallShow(zoneId) {
-      const fnName = 'show_' + zoneId;
-      const fn = window[fnName];
-
-      if (typeof fn === 'function') {
-        try {
-          logDebug(`Invoking ${fnName}()`);
-          // many SDKs accept optional args; we're calling with none to simply display the ad
-          const ret = fn();
-          // If it's a Promise, show a message until it resolves
-          if (ret && typeof ret.then === 'function') {
-            adBox.innerHTML = '<p>Ad opened — waiting for SDK promise to resolve...</p>';
-            ret.then(() => {
-              adBox.innerHTML = '<p>Ad closed (SDK promise resolved).</p>';
-              logDebug(`${fnName} promise resolved`);
-            }).catch(err => {
-              adBox.innerHTML = '<p>Ad closed with error (see console).</p>';
-              console.error(`${fnName} promise error:`, err);
-              logDebug(`${fnName} promise error`);
-            });
-          } else {
-            // Non-promise path: SDK likely handles UI; show temporary status
-            adBox.innerHTML = '<p>Ad open request sent — SDK is handling the display.</p>';
-            // We'll leave it to the SDK to show/close the ad
-          }
-        } catch (err) {
-          console.error('Error while calling', fnName, err);
-          adBox.innerHTML = '<p>Failed to open ad — check console for errors.</p>';
-          logDebug(`${fnName} invocation failed`);
-        }
-      } else {
-        adBox.innerHTML = `<p>SDK function <code>${fnName}</code> not available yet. Make sure the script loaded and zone id is correct.</p>`;
-        logDebug(`${fnName} not found on window`);
-      }
-    }
-
-    // hook buttons
-    pushBtn.addEventListener('click', function () {
-      safeCallShow(pushZone);
-    });
-
-    interstitialBtn.addEventListener('click', function () {
-      safeCallShow(interstitialZone);
-    });
-
-    // Helpful: attempt to detect when the SDKs attach their globals
-    // (poll briefly for up to ~6 seconds)
-    (function waitForGlobals() {
-      const expected = ['show_' + pushZone, 'show_' + interstitialZone];
-      const start = Date.now();
-      const timer = setInterval(() => {
-        expected.forEach(name => {
-          if (window[name] && !document.querySelector(`[data-sdk-ready="${name}"]`)) {
-            const marker = document.createElement('div');
-            marker.style.display = 'none';
-            marker.setAttribute('data-sdk-ready', name);
-            document.body.appendChild(marker);
-            logDebug(`SDK global ${name} detected`);
-          }
-        });
-        if (Date.now() - start > 6000) clearInterval(timer);
-      }, 500);
-    })();
-
-    // Optional: listen for postMessage events from ad iframe (some SDKs send events)
-    window.addEventListener('message', (ev) => {
-      // If you know the ad origin, check ev.origin === 'https://...' for security
-      try {
-        const d = typeof ev.data === 'string' ? JSON.parse(ev.data) : ev.data;
-        if (d && (d.event === 'complete' || d.event === 'close' || d.type === 'ad-close')) {
-          adBox.innerHTML = `<p>Ad event received: ${d.event || d.type || 'close'}</p>`;
-          logDebug('Received ad message: ' + JSON.stringify(d));
-        }
-      } catch (e) {
-        // ignore non-json messages
-      }
-    }, false);
-  </script>
 </body>
+
 </html>
