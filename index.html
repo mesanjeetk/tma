@@ -190,61 +190,193 @@
         <footer>Built with Monetag integration — scripts placed as provided.</footer>
     </div>
     <script>
-        
-        function waitForGlobal(fnName, timeoutMs = 5000) {
+        // --- Configuration ---
+        const SDK_FN_NAME = "show_show_10242148"; // update if Monetag uses a different global
+        const SDK_WAIT_MS = 5000;     // how long to wait for the SDK function to appear
+        const AD_MAX_MS = 15000;      // maximum time to wait for an ad to finish before fallback
+        const POLL_INTERVAL = 100;    // polling interval for waitForGlobal
+
+        // --- UI helpers ---
+        const btn = document.getElementById("btn");
+        const queueBadge = document.createElement("span");
+        queueBadge.style.marginLeft = "10px";
+        queueBadge.style.fontWeight = "600";
+        btn.after(queueBadge);
+
+        function updateBadge() {
+            queueBadge.textContent = queue.length > 0 ? `Queued: ${queue.length}` : "";
+        }
+
+        // --- wait for the SDK function to appear ---
+        function waitForGlobal(fnName, timeoutMs = SDK_WAIT_MS) {
             return new Promise((resolve, reject) => {
                 if (typeof window[fnName] === "function") return resolve(window[fnName]);
                 const start = Date.now();
-                const interval = setInterval(() => {
+                const iv = setInterval(() => {
                     if (typeof window[fnName] === "function") {
-                        clearInterval(interval);
+                        clearInterval(iv);
                         resolve(window[fnName]);
                     } else if (Date.now() - start > timeoutMs) {
-                        clearInterval(interval);
+                        clearInterval(iv);
                         reject(new Error("Timed out waiting for " + fnName));
                     }
-                }, 100);
+                }, POLL_INTERVAL);
             });
         }
 
-        async function showAds(options = { timeout: 5000 }) {
-            const fnName = "show_show_10242148"; // keep in sync with the script's global
-            try {
-                // wait for Monetag to expose the function (or fail after timeout)
-                const showFn = await waitForGlobal(fnName, options.timeout);
+        // --- heuristics to detect ad overlays/iframes inserted by ad SDKs ---
+        function watchForAdLifecycle(timeoutMs = AD_MAX_MS) {
+            return new Promise((resolve) => {
+                let detected = false;
+                let resolved = false;
 
-                // Optionally, you can wrap the call in a Promise if the function is callback-based.
-                // Here we assume it either runs synchronously or returns something we can await.
-                const result = showFn(); // call it
-                // If it returns a promise, await it; if not, resolve immediately with the result.
-                if (result && typeof result.then === "function") {
-                    return await result;
+                // helper: common detection tests
+                function isLikelyAdNode(node) {
+                    if (!(node instanceof Element)) return false;
+                    const tag = node.tagName.toLowerCase();
+                    if (tag === "iframe") return true;
+                    const cls = (node.className || "").toString().toLowerCase();
+                    const id = (node.id || "").toString().toLowerCase();
+                    const html = node.outerHTML ? node.outerHTML.toLowerCase() : "";
+                    // common keywords (vignette, monetag, overlay, modal, ad)
+                    return /vignette|monetag|overlay|modal|ad-|ad_|ads|interstitial|vignette|minimodal/.test(cls + " " + id + " " + html);
                 }
-                return result;
-            } catch (err) {
-                // bubble up for caller to handle
-                throw err;
-            }
+
+                // If an ad node already exists, consider it detected
+                const existing = Array.from(document.body.querySelectorAll("iframe, div, section")).find(isLikelyAdNode);
+                if (existing) detected = true;
+
+                // If we detected something, wait for its removal
+                const observer = new MutationObserver((mutations) => {
+                    // check added nodes for ad appearance
+                    for (const m of mutations) {
+                        for (const n of m.addedNodes) {
+                            if (isLikelyAdNode(n)) {
+                                detected = true;
+                            }
+                        }
+                        for (const n of m.removedNodes) {
+                            if (isLikelyAdNode(n)) {
+                                // ad node removed -> ad finished
+                                if (!resolved) {
+                                    resolved = true;
+                                    observer.disconnect();
+                                    resolve({ reason: "removed" });
+                                    return;
+                                }
+                            }
+                        }
+                    }
+
+                    // if we detected ad presence and there are no nodes matching now, treat as finished
+                    if (detected) {
+                        const still = Array.from(document.body.querySelectorAll("iframe, div, section")).some(isLikelyAdNode);
+                        if (!still && !resolved) {
+                            resolved = true;
+                            observer.disconnect();
+                            resolve({ reason: "gone" });
+                            return;
+                        }
+                    }
+                });
+
+                observer.observe(document.body, { childList: true, subtree: true });
+
+                // fallback: if ad appears but nothing is removed (or SDK doesn't add DOM nodes),
+                // resolve after timeoutMs so we don't stall forever
+                setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        observer.disconnect();
+                        resolve({ reason: "timeout" });
+                    }
+                }, timeoutMs);
+            });
         }
 
-        const btn = document.getElementById("btn");
-        btn.addEventListener("click", async () => {
-            btn.disabled = true;
-            btn.textContent = "Showing…";
-            console.log("Trying to show ads");
+        // --- main function to call the SDK once and wait until that ad instance completes ---
+        async function callSdkAndWait() {
+            const fn = await waitForGlobal(SDK_FN_NAME).catch(err => { throw err; });
+
+            // Call the SDK. It may return a promise or run synchronously.
+            let ret;
             try {
-                await showAds({ timeout: 5000 }); // wait up to 5s for the SDK
-                console.log("Ad function called successfully");
+                ret = fn();
             } catch (err) {
-                console.error("Failed to show ads:", err);
-                // Friendly UI fallback
-                alert("Unable to show ads right now. Please check console for details.");
-            } finally {
-                btn.disabled = false;
-                btn.textContent = "Show ads";
+                // SDK threw immediately — forward the error so caller knows.
+                throw err;
             }
+
+            // If SDK returned a Promise, await it (prefer this if available)
+            if (ret && typeof ret.then === "function") {
+                try {
+                    await Promise.race([ret, new Promise((_, rej) => setTimeout(() => rej(new Error("SDK promise timed out")), AD_MAX_MS))]);
+                    return;
+                } catch (err) {
+                    // even if the returned promise rejects, we still proceed (treat as ad finished)
+                    console.warn("SDK returned promise rejected:", err);
+                    return;
+                }
+            }
+
+            // Otherwise, use DOM heuristics / timeout to detect when ad is done
+            await watchForAdLifecycle(AD_MAX_MS);
+        }
+
+        // --- queueing logic so users can click many times without refreshing ---
+        const queue = [];
+        let processing = false;
+
+        async function processQueue() {
+            if (processing) return;
+            processing = true;
+
+            while (queue.length > 0) {
+                updateBadge();
+                const req = queue.shift(); // we don't use req payload now, but kept for extensibility
+                // update UI: indicate active ad (but keep button available for queuing)
+                btn.classList.add("active");
+                btn.setAttribute("aria-busy", "true");
+                btn.textContent = `Showing… (left ${queue.length})`;
+
+                try {
+                    await callSdkAndWait();
+                } catch (err) {
+                    // if the SDK call failed, log it and continue (we don't block queue)
+                    console.error("Ad show failed:", err);
+                } finally {
+                    // small grace time between ads to avoid instant re-trigger chaos
+                    await new Promise(r => setTimeout(r, 600));
+                }
+            }
+
+            // done with queue
+            processing = false;
+            btn.classList.remove("active");
+            btn.removeAttribute("aria-busy");
+            btn.textContent = "Show ads";
+            updateBadge();
+        }
+
+        // --- button click handler: pushes to queue and starts processing ---
+        btn.addEventListener("click", () => {
+            // push an item to queue; can be an object if you want metadata
+            queue.push({ ts: Date.now() });
+            updateBadge();
+            processQueue().catch(err => console.error(err));
         });
+
+        // Optional: on load try to warm up SDK if it's lazy (non-blocking)
+        (async function warmup() {
+            try {
+                await waitForGlobal(SDK_FN_NAME, 3000);
+                console.log("Monetag SDK available");
+            } catch (err) {
+                console.warn("Monetag SDK not yet available:", err);
+            }
+        })();
     </script>
+
 
 </body>
 
