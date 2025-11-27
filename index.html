@@ -14,7 +14,9 @@
 
     <!-- Monetag: Interstitial / vignette zone (your snippet) -->
     <!-- <script>(function (s) { s.dataset.zone = '10242148', s.src = 'https://groleegni.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
-    <script>(function (s) { s.dataset.zone = '10242177', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <!-- <script>(function (s) { s.dataset.zone = '10242177', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
+
+    <script src="https://groleegni.net/vignette.min.js" data-zone="10242148" data-sdk="show_show_10242148"></script>
     <style>
         :root {
             --max-w: 900px;
@@ -143,6 +145,9 @@
     <div class="wrap">
         <header>
             <h1>My Blog — Latest posts</h1>
+            <button id="btn">
+                Show ads
+            </button>
         </header>
 
         <div class="main">
@@ -184,6 +189,62 @@
 
         <footer>Built with Monetag integration — scripts placed as provided.</footer>
     </div>
+    <script>
+        
+        function waitForGlobal(fnName, timeoutMs = 5000) {
+            return new Promise((resolve, reject) => {
+                if (typeof window[fnName] === "function") return resolve(window[fnName]);
+                const start = Date.now();
+                const interval = setInterval(() => {
+                    if (typeof window[fnName] === "function") {
+                        clearInterval(interval);
+                        resolve(window[fnName]);
+                    } else if (Date.now() - start > timeoutMs) {
+                        clearInterval(interval);
+                        reject(new Error("Timed out waiting for " + fnName));
+                    }
+                }, 100);
+            });
+        }
+
+        async function showAds(options = { timeout: 5000 }) {
+            const fnName = "show_show_10242148"; // keep in sync with the script's global
+            try {
+                // wait for Monetag to expose the function (or fail after timeout)
+                const showFn = await waitForGlobal(fnName, options.timeout);
+
+                // Optionally, you can wrap the call in a Promise if the function is callback-based.
+                // Here we assume it either runs synchronously or returns something we can await.
+                const result = showFn(); // call it
+                // If it returns a promise, await it; if not, resolve immediately with the result.
+                if (result && typeof result.then === "function") {
+                    return await result;
+                }
+                return result;
+            } catch (err) {
+                // bubble up for caller to handle
+                throw err;
+            }
+        }
+
+        const btn = document.getElementById("btn");
+        btn.addEventListener("click", async () => {
+            btn.disabled = true;
+            btn.textContent = "Showing…";
+            console.log("Trying to show ads");
+            try {
+                await showAds({ timeout: 5000 }); // wait up to 5s for the SDK
+                console.log("Ad function called successfully");
+            } catch (err) {
+                console.error("Failed to show ads:", err);
+                // Friendly UI fallback
+                alert("Unable to show ads right now. Please check console for details.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Show ads";
+            }
+        });
+    </script>
 
 </body>
 
