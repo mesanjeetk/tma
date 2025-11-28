@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>My Blog — Watch Ads</title>
+    <title>My Blog — By Sanjeet</title>
 
     <!-- Keep your verification meta -->
     <meta name="monetag" content="f55df23c6a9bf86610b6ed3900d3224d">
@@ -20,237 +20,374 @@
     <script src="https://groleegni.net/vignette.min.js" data-zone="10242148" data-sdk="show_show_10242148"></script>
 
     <style>
-        :root{
+        :root {
             --max-w: 1100px;
             --accent: #0078ff;
             --muted: #6b7280;
             --bg: #f6f7fb;
             --card: #ffffff;
             --radius: 12px;
-            --glass: rgba(255,255,255,0.6);
+            --glass: rgba(255, 255, 255, 0.6);
         }
 
         /* Basic reset */
-        *{box-sizing:border-box}
-        html,body{height:100%}
-        body{
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
             font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-            margin:0;
-            background: linear-gradient(180deg,#f6f8fc 0%, var(--bg) 100%);
-            color:#081427;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-            line-height:1.6;
-            padding-bottom:48px;
+            margin: 0;
+            background: linear-gradient(180deg, #f6f8fc 0%, var(--bg) 100%);
+            color: #081427;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+            padding-bottom: 48px;
         }
 
-        .container{
-            max-width:var(--max-w);
-            margin:28px auto;
-            padding:20px;
+        .container {
+            max-width: var(--max-w);
+            margin: 28px auto;
+            padding: 20px;
         }
 
-        header{
-            display:flex;
-            gap:16px;
-            align-items:center;
-            justify-content:space-between;
+        header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .brand{
-            display:flex;
-            gap:14px;
-            align-items:center;
+        .brand {
+            display: flex;
+            gap: 14px;
+            align-items: center;
         }
 
-        .logo{
-            width:52px;
-            height:52px;
-            border-radius:10px;
-            background:linear-gradient(135deg,var(--accent), #00c2ff);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:#fff;
-            font-weight:700;
-            font-size:18px;
-            box-shadow:0 8px 24px rgba(2,6,23,0.08);
+        .logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #00c2ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
         }
 
-        h1{margin:0;font-size:1.35rem}
-        .subtitle{color:var(--muted);font-size:0.95rem;margin-top:4px}
-
-        .controls{display:flex;gap:10px;align-items:center}
-        .btn{
-            background:var(--accent);
-            color:#fff;
-            border:0;
-            padding:10px 14px;
-            border-radius:10px;
-            cursor:pointer;
-            font-weight:600;
-            box-shadow:0 6px 18px rgba(2,6,23,0.08);
+        h1 {
+            margin: 0;
+            font-size: 1.35rem
         }
-        .btn.secondary{
-            background:transparent;
-            color:var(--accent);
-            border:1px solid rgba(0,120,255,0.12);
-            font-weight:600;
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-top: 4px
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.08);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid rgba(0, 120, 255, 0.12);
+            font-weight: 600;
         }
 
         /* layout */
-        .layout{
-            display:grid;
+        .layout {
+            display: grid;
             grid-template-columns: 1fr 360px;
-            gap:22px;
-            margin-top:18px;
+            gap: 22px;
+            margin-top: 18px;
         }
 
-        main.content{
-            background:var(--card);
-            padding:22px;
-            border-radius:var(--radius);
-            box-shadow:0 10px 30px rgba(12,18,30,0.06);
+        main.content {
+            background: var(--card);
+            padding: 22px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(12, 18, 30, 0.06);
         }
 
-        aside.sidebar{
-            position:relative;
-            background:var(--card);
-            padding:18px;
-            border-radius:var(--radius);
-            height:fit-content;
-            box-shadow:0 10px 30px rgba(12,18,30,0.06);
+        aside.sidebar {
+            position: relative;
+            background: var(--card);
+            padding: 18px;
+            border-radius: var(--radius);
+            height: fit-content;
+            box-shadow: 0 10px 30px rgba(12, 18, 30, 0.06);
         }
 
         /* Featured */
-        .featured{
-            display:flex;
-            gap:18px;
-            align-items:stretch;
-            margin-bottom:18px;
+        .featured {
+            display: flex;
+            gap: 18px;
+            align-items: stretch;
+            margin-bottom: 18px;
         }
 
-        .featured .media{
-            flex:0 0 210px;
-            border-radius:10px;
-            overflow:hidden;
-            background:linear-gradient(160deg,#e6f0ff,#f6fbff);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            min-height:120px;
+        .featured .media {
+            flex: 0 0 210px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: linear-gradient(160deg, #e6f0ff, #f6fbff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
         }
 
-        .featured .media img{width:100%;height:100%;object-fit:cover;display:block}
-
-        .featured .meta{
-            flex:1;
-        }
-        .kicker{font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
-        .post-title{font-size:1.25rem;margin:0 0 8px}
-        .post-excerpt{color:#334155;margin:0}
-
-        .article{
-            border-top:1px solid #f0f2f6;
-            padding-top:18px;
-            margin-top:16px;
+        .featured .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
         }
 
-        .article h2{margin:0 0 8px;font-size:1.05rem}
-        .article .meta-row{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:0.9rem;margin-bottom:8px}
-        .article p{color:#223;}
+        .featured .meta {
+            flex: 1;
+        }
+
+        .kicker {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            margin: 0 0 8px
+        }
+
+        .post-excerpt {
+            color: #334155;
+            margin: 0
+        }
+
+        .article {
+            border-top: 1px solid #f0f2f6;
+            padding-top: 18px;
+            margin-top: 16px;
+        }
+
+        .article h2 {
+            margin: 0 0 8px;
+            font-size: 1.05rem
+        }
+
+        .article .meta-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px
+        }
+
+        .article p {
+            color: #223;
+        }
 
         /* long reading sections */
-        .longform{
-            margin-top:18px;
-            display:grid;
+        .longform {
+            margin-top: 18px;
+            display: grid;
             grid-template-columns: 1fr 250px;
-            gap:18px;
+            gap: 18px;
         }
-        .longform .body{
-            background:linear-gradient(180deg,#fff,#fcfeff);
-            padding:18px;border-radius:10px;
+
+        .longform .body {
+            background: linear-gradient(180deg, #fff, #fcfeff);
+            padding: 18px;
+            border-radius: 10px;
         }
-        .longform .toc{
-            background:linear-gradient(180deg,#fbfbff,#ffffff);
-            padding:12px;border-radius:10px;border:1px solid #f2f4f8;
-            font-size:0.95rem;color:#243;
+
+        .longform .toc {
+            background: linear-gradient(180deg, #fbfbff, #ffffff);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #f2f4f8;
+            font-size: 0.95rem;
+            color: #243;
         }
-        .toc ol{padding-left:18px;margin:8px 0}
-        .toc li{margin:8px 0;color:var(--muted)}
+
+        .toc ol {
+            padding-left: 18px;
+            margin: 8px 0
+        }
+
+        .toc li {
+            margin: 8px 0;
+            color: var(--muted)
+        }
 
         /* code block style */
-        pre{
-            background:#0b1220;
-            color:#d7e9ff;
-            padding:12px;
-            border-radius:8px;
-            overflow:auto;
+        pre {
+            background: #0b1220;
+            color: #d7e9ff;
+            padding: 12px;
+            border-radius: 8px;
+            overflow: auto;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-            font-size:0.85rem;
+            font-size: 0.85rem;
         }
 
         /* ad box (left in content) */
-        #ad-box{
-            margin:18px 0;
-            padding:14px;
-            border-radius:10px;
-            min-height:140px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background:linear-gradient(180deg,#fff,#fbfeff);
-            border:1px dashed #e6edf9;
-            color:#223;
+        #ad-box {
+            margin: 18px 0;
+            padding: 14px;
+            border-radius: 10px;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #fff, #fbfeff);
+            border: 1px dashed #e6edf9;
+            color: #223;
         }
 
         /* Sidebar bits */
-        .profile{
-            display:flex;
-            gap:12px;
-            align-items:center;
-            margin-bottom:12px;
+        .profile {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
         }
-        .avatar{
-            width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#ffd7b5,#ffb4a2);
-            display:flex;align-items:center;justify-content:center;font-weight:700;color:#3a2c20;
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffd7b5, #ffb4a2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #3a2c20;
         }
-        .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-        .tag{background:#f2f6ff;padding:6px 10px;border-radius:999px;font-weight:600;color:var(--accent);font-size:0.85rem}
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .tag {
+            background: #f2f6ff;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.85rem
+        }
 
         /* newsletter */
-        .newsletter{margin-top:14px;padding:12px;background:linear-gradient(180deg,#f8fbff,#ffffff);border-radius:8px;border:1px solid #eef3ff}
-        .newsletter input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf9;margin-top:8px}
+        .newsletter {
+            margin-top: 14px;
+            padding: 12px;
+            background: linear-gradient(180deg, #f8fbff, #ffffff);
+            border-radius: 8px;
+            border: 1px solid #eef3ff
+        }
+
+        .newsletter input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6edf9;
+            margin-top: 8px
+        }
 
         /* related grid */
-        .related{
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:10px;
-            margin-top:12px;
+        .related {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
         }
-        .card{
-            background:linear-gradient(180deg,#fff,#fcfeff);
-            padding:10px;border-radius:10px;border:1px solid #f2f6fb;font-size:0.95rem;
+
+        .card {
+            background: linear-gradient(180deg, #fff, #fcfeff);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #f2f6fb;
+            font-size: 0.95rem;
         }
 
         /* comments */
-        .comments{margin-top:18px}
-        .comment{padding:12px;border-radius:8px;border:1px solid #f2f6fb;margin-bottom:10px;background:#fff}
+        .comments {
+            margin-top: 18px
+        }
 
-        footer{
-            margin-top:22px;text-align:center;color:var(--muted);font-size:0.95rem;padding-top:18px;
+        .comment {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #f2f6fb;
+            margin-bottom: 10px;
+            background: #fff
+        }
+
+        footer {
+            margin-top: 22px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem;
+            padding-top: 18px;
         }
 
         /* responsive */
-        @media (max-width:1040px){
-            .layout{grid-template-columns:1fr 320px}
+        @media (max-width:1040px) {
+            .layout {
+                grid-template-columns: 1fr 320px
+            }
         }
-        @media (max-width:880px){
-            .layout{grid-template-columns:1fr}
-            .longform{grid-template-columns:1fr}
-            .featured{flex-direction:column}
-            .featured .media{width:100%;flex:0 0 auto;min-height:160px}
+
+        @media (max-width:880px) {
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            .longform {
+                grid-template-columns: 1fr
+            }
+
+            .featured {
+                flex-direction: column
+            }
+
+            .featured .media {
+                width: 100%;
+                flex: 0 0 auto;
+                min-height: 160px
+            }
         }
     </style>
 </head>
@@ -262,14 +399,16 @@
                 <div class="logo">MB</div>
                 <div>
                     <h1>My Blog — Watch Ads</h1>
-                    <div class="subtitle">A demo site for Monetag integration • UX notes, ad best practices, long-form content</div>
+                    <div class="subtitle">A demo site for Monetag integration • UX notes, ad best practices, long-form
+                        content</div>
                 </div>
             </div>
 
             <div class="controls">
                 <!-- The original button ID must be preserved because JS references it. -->
-                <button class="btn" id="btn">Watch Ads</button>
-                <button class="btn secondary" id="btn-mini" title="Secondary ad action (calls the same ad function)">Quick Ad</button>
+                <button class="btn" id="btn">See Now</button>
+                <button class="btn secondary" id="btn-mini"
+                    title="Secondary ad action (calls the same ad function)">Quick show</button>
             </div>
         </header>
 
@@ -288,11 +427,16 @@
 
                     <div class="meta">
                         <div class="kicker">Featured — Performance</div>
-                        <h2 class="post-title" id="featured-title">How to Improve Page Speed in 2025 (Practical Checklist)</h2>
-                        <p class="post-excerpt">A step-by-step checklist for resource priorities, images, caching, bundle splitting, and monitoring — short, practical, and actionable.</p>
+                        <h2 class="post-title" id="featured-title">How to Improve Page Speed in 2025 (Practical
+                            Checklist)</h2>
+                        <p class="post-excerpt">A step-by-step checklist for resource priorities, images, caching,
+                            bundle splitting, and monitoring — short, practical, and actionable.</p>
                         <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-                            <button class="btn" onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch Ad &amp; Reward</button>
-                            <div style="color:var(--muted)">Reading time: <strong>6 min</strong> • Updated: <time datetime="2025-11-27">Nov 27, 2025</time></div>
+                            <button class="btn"
+                                onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch
+                                Ad &amp; Reward</button>
+                            <div style="color:var(--muted)">Reading time: <strong>6 min</strong> • Updated: <time
+                                    datetime="2025-11-27">Nov 27, 2025</time></div>
                         </div>
                     </div>
                 </section>
@@ -316,7 +460,9 @@
                             <span>•</span>
                             <span>4 min read</span>
                         </div>
-                        <p>In-page push (also called native or click-to-push) lets you show a compact offer within your content. Learn placement patterns, frequency caps, and how to measure engagement without hurting UX.</p>
+                        <p>In-page push (also called native or click-to-push) lets you show a compact offer within your
+                            content. Learn placement patterns, frequency caps, and how to measure engagement without
+                            hurting UX.</p>
                     </article>
 
                     <article style="margin-top:14px">
@@ -328,7 +474,8 @@
                             <span>•</span>
                             <span>3 min read</span>
                         </div>
-                        <p>Interstitials are full-screen experiences and have high visibility. We explain safe triggers, avoidable mistakes, and how to pair them with reward flows.</p>
+                        <p>Interstitials are full-screen experiences and have high visibility. We explain safe triggers,
+                            avoidable mistakes, and how to pair them with reward flows.</p>
                     </article>
 
                 </section>
@@ -337,19 +484,26 @@
                 <section class="longform" aria-labelledby="longform-title">
                     <div class="body">
                         <h2 id="longform-title">A longer guide: Ad UX & Monetization Strategy</h2>
-                        <p class="meta-row"><span>By <strong>Admin</strong></span> • <span>Nov 27, 2025</span> • <span>12 min read</span></p>
+                        <p class="meta-row"><span>By <strong>Admin</strong></span> • <span>Nov 27, 2025</span> •
+                            <span>12 min read</span></p>
 
                         <h3>Intro</h3>
-                        <p>Monetizing content responsibly requires balancing revenue and user experience. Below you'll find structured guidelines, sample markup, and UX-first approaches to integrate Monetag ad zones while keeping readers happy.</p>
+                        <p>Monetizing content responsibly requires balancing revenue and user experience. Below you'll
+                            find structured guidelines, sample markup, and UX-first approaches to integrate Monetag ad
+                            zones while keeping readers happy.</p>
 
                         <h3>1. Placement & Priority</h3>
-                        <p>Good placements are contextual and predictable. Use in-article push zones near natural breaks, reserve interstitials for rewarded flows or exit intent, and always provide clear affordances so the user knows what happens when they interact.</p>
+                        <p>Good placements are contextual and predictable. Use in-article push zones near natural
+                            breaks, reserve interstitials for rewarded flows or exit intent, and always provide clear
+                            affordances so the user knows what happens when they interact.</p>
 
                         <h3>2. Frequency & Reward</h3>
-                        <p>Use frequency caps on aggressive units. For rewarded flows — like "watch an ad for a hint" — make reward mechanics explicit and immediate.</p>
+                        <p>Use frequency caps on aggressive units. For rewarded flows — like "watch an ad for a hint" —
+                            make reward mechanics explicit and immediate.</p>
 
                         <h3>3. Accessibility & Performance</h3>
-                        <p>Lazy-load scripts where possible, use meaningful ARIA labels on interactive ad containers, and ensure keyboard focus isn't trapped by overlays.</p>
+                        <p>Lazy-load scripts where possible, use meaningful ARIA labels on interactive ad containers,
+                            and ensure keyboard focus isn't trapped by overlays.</p>
 
                         <h3>4. Example snippet (client side)</h3>
                         <pre><code>// call the ad SDK then show reward
@@ -364,12 +518,14 @@ show_10244671().then(()=>{
                         <h3>5. FAQ</h3>
                         <details open>
                             <summary><strong>Will ads slow down my page?</strong></summary>
-                            <p>Ad scripts can increase page weight; prefer async loading and only initialize SDKs where required. Monitor with Real User Monitoring (RUM) and set performance budgets.</p>
+                            <p>Ad scripts can increase page weight; prefer async loading and only initialize SDKs where
+                                required. Monitor with Real User Monitoring (RUM) and set performance budgets.</p>
                         </details>
 
                         <details>
                             <summary><strong>What about mobile UX?</strong></summary>
-                            <p>Opt for smaller in-content units and avoid full-screen units during reading. On mobile, allow users to dismiss units quickly.</p>
+                            <p>Opt for smaller in-content units and avoid full-screen units during reading. On mobile,
+                                allow users to dismiss units quickly.</p>
                         </details>
 
                         <div class="comments" aria-labelledby="comments">
@@ -384,7 +540,8 @@ show_10244671().then(()=>{
                             </div>
 
                             <div style="margin-top:12px">
-                                <textarea placeholder="Write a comment (non-functional demo)" style="width:100%;min-height:88px;padding:10px;border-radius:8px;border:1px solid #e6edf9"></textarea>
+                                <textarea placeholder="Write a comment (non-functional demo)"
+                                    style="width:100%;min-height:88px;padding:10px;border-radius:8px;border:1px solid #e6edf9"></textarea>
                                 <div style="display:flex;justify-content:flex-end;margin-top:8px">
                                     <button class="btn secondary">Post comment</button>
                                 </div>
@@ -405,8 +562,11 @@ show_10244671().then(()=>{
                         <div style="margin-top:12px">
                             <strong>Quick actions</strong>
                             <div style="display:flex;gap:8px;margin-top:8px">
-                                <button class="btn" onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch Ad</button>
-                                <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top</button>
+                                <button class="btn"
+                                    onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch
+                                    Ad</button>
+                                <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back
+                                    to top</button>
                             </div>
                         </div>
                     </aside>
@@ -442,13 +602,15 @@ show_10244671().then(()=>{
                     <div class="avatar">A</div>
                     <div>
                         <div style="font-weight:700">About the author</div>
-                        <div style="color:var(--muted);font-size:0.92rem">A short bio about the site owner. Passionate about web performance and responsible monetization.</div>
+                        <div style="color:var(--muted);font-size:0.92rem">A short bio about the site owner. Passionate
+                            about web performance and responsible monetization.</div>
                     </div>
                 </div>
 
                 <div class="newsletter" aria-labelledby="newsletter">
                     <strong id="newsletter">Newsletter</strong>
-                    <div style="color:var(--muted);font-size:0.95rem;margin-top:6px">Get short guides and release notes.</div>
+                    <div style="color:var(--muted);font-size:0.95rem;margin-top:6px">Get short guides and release notes.
+                    </div>
                     <input type="email" placeholder="you@email.com" aria-label="email">
                     <div style="display:flex;gap:8px;margin-top:8px">
                         <button class="btn" style="flex:1">Subscribe</button>
@@ -478,7 +640,8 @@ show_10244671().then(()=>{
                 </div>
 
                 <!-- small ad area in sidebar -->
-                <div id="sidebar-ad" style="margin-top:14px;padding:12px;border-radius:8px;border:1px dashed #eef5ff;background:linear-gradient(180deg,#fff,#fbfeff);min-height:120px;display:flex;align-items:center;justify-content:center;">
+                <div id="sidebar-ad"
+                    style="margin-top:14px;padding:12px;border-radius:8px;border:1px dashed #eef5ff;background:linear-gradient(180deg,#fff,#fbfeff);min-height:120px;display:flex;align-items:center;justify-content:center;">
                     Sidebar ad placement
                 </div>
 
@@ -494,7 +657,9 @@ show_10244671().then(()=>{
         </div>
 
         <footer>
-            Built with Monetag integration — scripts placed as provided. • <span style="display:block;margin-top:6px;color:var(--muted)">This page is a demo: ad SDKs are included exactly as you provided. Keep privacy & policy checks in place for production.</span>
+            Built with Monetag integration — scripts placed as provided. • <span
+                style="display:block;margin-top:6px;color:var(--muted)">This page is a demo: ad SDKs are included
+                exactly as you provided. Keep privacy & policy checks in place for production.</span>
         </footer>
     </div>
 
