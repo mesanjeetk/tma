@@ -8,7 +8,7 @@
 
     <!-- Keep your verification meta -->
     <meta name="monetag" content="f55df23c6a9bf86610b6ed3900d3224d">
-    <script>(function (s) { s.dataset.zone = '10246554', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <!-- <script>(function (s) { s.dataset.zone = '10246554', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script> -->
 
     <!-- Monetag: In-page push zone (your snippet) -->
     <script>(function (s) { s.dataset.zone = '10242143', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -432,20 +432,12 @@
                         <p class="post-excerpt">A step-by-step checklist for resource priorities, images, caching,
                             bundle splitting, and monitoring — short, practical, and actionable.</p>
                         <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-                            <button class="btn"
-                                onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch
-                                Ad &amp; Reward</button>
+                            <button class="btn">Get &amp; Reward</button>
                             <div style="color:var(--muted)">Reading time: <strong>6 min</strong> • Updated: <time
                                     datetime="2025-11-27">Nov 27, 2025</time></div>
                         </div>
                     </div>
                 </section>
-
-                <!-- in-page ad box — keep present -->
-                <div id="ad-box" aria-live="polite">
-                    <!-- The ad SDK will render into the page when invoked. This container remains available for in-content placements. -->
-                    In-content ad zone — click "Watch Ads" above to trigger.
-                </div>
 
                 <!-- Articles list -->
                 <section class="article" aria-labelledby="sec-articles">
@@ -485,7 +477,8 @@
                     <div class="body">
                         <h2 id="longform-title">A longer guide: Ad UX & Monetization Strategy</h2>
                         <p class="meta-row"><span>By <strong>Admin</strong></span> • <span>Nov 27, 2025</span> •
-                            <span>12 min read</span></p>
+                            <span>12 min read</span>
+                        </p>
 
                         <h3>Intro</h3>
                         <p>Monetizing content responsibly requires balancing revenue and user experience. Below you'll
@@ -506,14 +499,16 @@
                             and ensure keyboard focus isn't trapped by overlays.</p>
 
                         <h3>4. Example snippet (client side)</h3>
-                        <pre><code>// call the ad SDK then show reward
-show_10244671().then(()=>{
-  // reward user
-  console.log('Ad finished');
-}).catch(err=>{
-  console.error('Ad error', err);
-});
-</code></pre>
+                        <pre>
+                            <code>// call the ad SDK then show reward
+                                show_10244671().then(()=>{
+                                // reward user
+                                console.log('Ad finished');
+                                }).catch(err=>{
+                                console.error('Ad error', err);
+                                });
+                            </code>
+                        </pre>
 
                         <h3>5. FAQ</h3>
                         <details open>
@@ -562,9 +557,7 @@ show_10244671().then(()=>{
                         <div style="margin-top:12px">
                             <strong>Quick actions</strong>
                             <div style="display:flex;gap:8px;margin-top:8px">
-                                <button class="btn"
-                                    onclick="show_10244671().then(()=>console.log('Ads shown')).catch(()=>alert('Error while showing the ads'))">Watch
-                                    Ad</button>
+                                <button class="btn">See Now</button>
                                 <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back
                                     to top</button>
                             </div>
@@ -667,17 +660,24 @@ show_10244671().then(()=>{
         // --- UI helpers ---
         // Preserve the original btn id and functionality.
         window.addEventListener("load", () => {
-            const btn = document.getElementById("btn");
+            const btns = document.querySelectorAll('#btn');
+
             const btnMini = document.getElementById("btn-mini");
 
-            btn.addEventListener("click", () => {
-                // IMPORTANT: don't change this function name or signature.
-                show_10244671().then(() => { console.log("Ads shown") }).catch(() => alert("Error while showing the ads"))
-            });
+            Array.from(btns).forEach(btn => {
+                btn.addEventListener("click", showAd);
+            })
+
+            const showAd = () => {
+                if (typeof show_10244671 === 'function') {
+                    show_10244671().then(() => { console.log("Ads shown") }).catch(() => alert("Error while showing the ads"))
+                }
+            }
+
+
 
             btnMini.addEventListener("click", () => {
-                // secondary action also uses the same SDK call intentionally
-                show_10244671().then(() => { console.log("Quick ad shown") }).catch(() => alert("Error while showing the ads"))
+                showAd()
             });
 
             // Expose a small debug flag in the page if Telegram (or other SDK) is present.
