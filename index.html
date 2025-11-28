@@ -406,7 +406,7 @@
 
             <div class="controls">
                 <!-- The original button ID must be preserved because JS references it. -->
-                <button class="btn" id="btn">See Now</button>
+                <button class="btn" id="btn" data-ad="true">See Now</button>
                 <button class="btn secondary" id="btn-mini"
                     title="Secondary ad action (calls the same ad function)">Quick show</button>
             </div>
@@ -422,7 +422,7 @@
                         <svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'>
                           <rect width='100%' height='100%' fill='%23e6f0ff'/>
                           <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23007bff'>Featured Image</text>
-                        </svg>" alt="">
+                        </svg>" alt="Featured image">
                     </div>
 
                     <div class="meta">
@@ -501,11 +501,11 @@
                         <h3>4. Example snippet (client side)</h3>
                         <pre>
                             <code>// call the ad SDK then show reward
-                                show_10244671().then(()=>{
-                                // reward user
-                                console.log('Ad finished');
+                                show_10244671().then(()=>{ 
+                                    // reward user
+                                    console.log('Ad finished');
                                 }).catch(err=>{
-                                console.error('Ad error', err);
+                                    console.error('Ad error', err);
                                 });
                             </code>
                         </pre>
@@ -557,7 +557,8 @@
                         <div style="margin-top:12px">
                             <strong>Quick actions</strong>
                             <div style="display:flex;gap:8px;margin-top:8px">
-                                <button class="btn">See Now</button>
+                                <!-- Added data-ad so this also triggers the ad action without duplicating IDs -->
+                                <button class="btn" data-ad="true">See Now</button>
                                 <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back
                                     to top</button>
                             </div>
@@ -660,28 +661,50 @@
         // --- UI helpers ---
         // Preserve the original btn id and functionality.
         window.addEventListener("load", () => {
-            const btns = document.querySelectorAll('#btn');
 
-            const btnMini = document.getElementById("btn-mini");
-
-            Array.from(btns).forEach(btn => {
-                btn.addEventListener("click", showAd);
-            })
-
-            const showAd = () => {
+            // Define showAd before attaching listeners so it's available.
+            function showAd() {
                 if (typeof show_10244671 === 'function') {
-                    show_10244671().then(() => { console.log("Ads shown") }).catch(() => alert("Error while showing the ads"))
+                    try {
+                        // show_10244671 may return a promise
+                        const result = show_10244671();
+                        if (result && typeof result.then === 'function') {
+                            result.then(() => {
+                                console.log("Ads shown");
+                            }).catch(err => {
+                                console.error("Ad SDK error:", err);
+                                alert("Error while showing the ads (check console for details)");
+                            });
+                        } else {
+                            // non-promise return
+                            console.log("Ad call completed (non-promise).");
+                        }
+                    } catch (err) {
+                        console.error("Exception when calling ad SDK:", err);
+                        alert("Error while showing the ads (exception).");
+                    }
+                } else {
+                    console.warn("Ad SDK (show_10244671) not available on this page.");
+                    alert("Ad SDK not loaded.");
                 }
             }
 
+            // select all buttons that are explicitly opted-in to trigger the ad flow
+            const adButtons = document.querySelectorAll('[data-ad="true"]');
 
-
-            btnMini.addEventListener("click", () => {
-                showAd()
+            adButtons.forEach(btn => {
+                btn.addEventListener("click", showAd);
             });
 
+            const btnMini = document.getElementById("btn-mini");
+            if (btnMini) {
+                btnMini.addEventListener("click", () => {
+                    showAd();
+                });
+            }
+
             // Expose a small debug flag in the page if Telegram (or other SDK) is present.
-            if (window.Telegram) {
+            if (typeof window.Telegram !== 'undefined') {
                 const debug = document.createElement('div');
                 debug.style.marginTop = '12px';
                 debug.style.color = '#0b6';
